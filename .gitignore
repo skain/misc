@@ -88,3 +88,6 @@ bvenv/
 
 # Rope project settings
 .ropeproject
+
+
+message_db.json

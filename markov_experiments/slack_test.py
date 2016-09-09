@@ -107,14 +107,11 @@ def update_corpus():
 
     # Load the current database
     messages_db = _load_db()
-    new_messages = fetch_new_messages()
-    if 'messages' not in new_messages:
-        print('no messages found after update_corpus->fetch_new_messages')
-        pdb.set_trace()
-    if len(new_messages) > 0:
-        _add_messages(messages_db, new_messages)
-
     starting_count = len(messages_db.keys())
+    new_messages = fetch_new_messages()
+
+    if len(new_messages) > 0:
+        messages_db.update(new_messages)
 
     # See if any new keys were added
     final_count = len(messages_db.keys())
