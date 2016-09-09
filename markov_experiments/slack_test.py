@@ -125,5 +125,18 @@ def update_corpus():
     return new_message_count
 
 
+def build_text_model():
+    """
+    Read the latest 'database' off disk and build a new markov chain generator model.
+    Returns TextModel.
+    """
+
+    messages = _load_db()
+    return markovify.Text(" ".join(messages.values()), state_size=2)
+
 if __name__ == '__main__':
     update_corpus()
+    text_model = build_text_model()
+
+    for i in range(0, 20):
+        print(text_model.make_sentence())
